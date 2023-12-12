@@ -33,7 +33,7 @@ public class OCRController {
             return "error"; // 파일이 비어있을 경우 에러를 처리하는 HTML 템플릿으로 이동
         }
 
-        String secretKey = "T0RSWVh5SFpqYUliYXFMdXNmU0xpbndPd1JrYkRITUg=";
+        String secretKey = "Your API Key";
 
         File tempFile = File.createTempFile("temp", file.getOriginalFilename());
         file.transferTo(tempFile);
