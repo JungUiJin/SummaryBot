@@ -27,7 +27,7 @@ public class OCRController {
     public ResponseEntity ocr() throws  IOException{
         String fileName = "test.JPG";
         File file = ResourceUtils.getFile("classpath:static/image/"+fileName);
-        String secretKey = "T0RSWVh5SFpqYUliYXFMdXNmU0xpbndPd1JrYkRITUg=";
+        String secretKey = "apikey";
         
         List<String> result = OCRService.callApi("POST", file.getPath(),secretKey , "jpg");
         return new ResponseEntity(result, HttpStatus.OK);
