@@ -14,13 +14,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.ChatGPT.ChatService;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
 public class OCRController {
+	private final ChatService chatService;
+	
 	@GetMapping("/OCRController")
     public ResponseEntity ocr() throws  IOException{
         String fileName = "test.JPG";
         File file = ResourceUtils.getFile("classpath:static/image/"+fileName);
-        String secretKey = "Your API Key";
+        String secretKey = "T0RSWVh5SFpqYUliYXFMdXNmU0xpbndPd1JrYkRITUg=";
         
         List<String> result = OCRService.callApi("POST", file.getPath(),secretKey , "jpg");
         return new ResponseEntity(result, HttpStatus.OK);
@@ -41,9 +48,11 @@ public class OCRController {
         List<String> result = OCRService.callApi("POST", tempFile.getPath(), secretKey, "jpg");
 
         tempFile.delete(); // 임시 파일 삭제
+        
+        String gptQuestion = chatService.getChatResponse("다음 문장을 분석해서 주제, 간략한 내용을 알려줘. '"+result+"'");
 
-        model.addAttribute("ocrResult", result); // OCR 결과를 HTML 템플릿에 전달
+        model.addAttribute("ocrResult", gptQuestion); // OCR 결과를 HTML 템플릿에 전달
 
-        return "redirect:/chatGptController"; // OCR 결과를 표시하는 HTML 템플릿 이름 반환
+        return "ocrResult"; // OCR 결과를 표시하는 HTML 템플릿 이름 반환
     }
 }
