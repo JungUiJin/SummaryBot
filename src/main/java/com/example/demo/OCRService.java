@@ -22,8 +22,8 @@ import org.json.simple.parser.ParseException;
 
 public class OCRService {
 	public static List<String> callApi(String type, String filePath, String naver_secretKey, String ext) {
-        String apiURL = "https://xfkc4evysu.apigw.ntruss.com/custom/v1/26260/b8645e660d63e48ecfd3d96322ddc88be902d32b96e1ceedebb859530ed45322/general";
-        String secretKey = "T0RSWVh5SFpqYUliYXFMdXNmU0xpbndPd1JrYkRITUg=";
+        String apiURL = "apiurl";
+        String secretKey = "apikey";
         String imageFile = filePath;
         List<String> parseData = null;
 
